@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>memoization</title>
+</head>
+<body>
+
+<!--https://www.sitepoint.com/implementing-memoization-in-javascript/-->
+
+<div>
+    Memoization is a programming technique which attempts to increase a function’s
+    performance by caching its previously computed results.
+    Because JavaScript objects behave like associative arrays, they are ideal
+    candidates to act as caches. Each time a memoized function is called,
+    its parameters are used to index the cache.
+
+    If the data is present, then it can be returned, without executing the entire function.
+    However, if the data is not cached, then the function is executed,
+    and the result is added to the cache.
+</div>
+    <script src="memoization.js"></script>
+</body>
+</html>
