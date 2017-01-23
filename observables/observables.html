@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>observables</title>
+</head>
+<body>
+
+<p>Observables are like functions with zero arguments, but generalize those to allow multiple values.</p>
+<span>
+    function foo() {
+      console.log('Hello');
+      return 42;
+    }
+
+    var x = foo.call(); // same as foo()
+    console.log(x);
+    var y = foo.call(); // same as foo()
+    console.log(y);
+
+    We expect to see as output:
+
+    "Hello"
+    42
+    "Hello"
+    42
+</span>
+
+<p> You can write the same behavior above, but with Observables:</p>
+<span>
+    var foo = Rx.Observable.create(function (observer) {
+      console.log('Hello');
+      observer.next(42);
+    });
+
+    foo.subscribe(function (x) {
+      console.log(x);
+    });
+    foo.subscribe(function (y) {
+      console.log(y);
+    });
+    And the output is the same:
+
+    "Hello"
+    42
+    "Hello"
+    42
+</span>
+
+<p>
+    Subscribing to an Observable is analogous to calling a Function.
+    Some people claim that Observables are asynchronous. That is not true.
+    If you surround a function call with logs, like this:
+</p>
+
+<p>
+    console.log('before');
+    console.log(foo.call());
+    console.log('after');
+
+    You will see the output:
+
+    "before"
+    "Hello"
+    42
+    "after"
+</p>
+<p>
+    And this is the same behavior with Observables:
+
+    console.log('before');
+    foo.subscribe(function (x) {
+    console.log(x);
+    });
+    console.log('after');
+    And the output is:
+
+    "before"
+    "Hello"
+    42
+    "after"
+</p>
+<p>
+    Which proves the subscription of foo was entirely synchronous, just like a function.
+
+    Observables are able to deliver values either synchronously or asynchronously.
+
+    What is the difference between an Observable and a function? Observables can "return" multiple values over time, something which functions cannot. You can't do this:
+</p>
+<p>
+    function foo() {
+        console.log('Hello');
+        return 42;
+        return 100; // dead code. will never happen
+    }
+    Functions can only return one value. Observables, however, can do this:
+
+    var foo = Rx.Observable.create(function (observer) {
+        console.log('Hello');
+        observer.next(42);
+        observer.next(100); // "return" another value
+        observer.next(200); // "return" yet another
+    });
+
+    console.log('before');
+        foo.subscribe(function (x) {
+        console.log(x);
+    });
+    console.log('after');
+    With synchronous output:
+
+    "before"
+    "Hello"
+    42
+    100
+    200
+    "after"
+</p>
+<p>
+    func.call() means "give me one value synchronously"
+    observable.subscribe() means "give me any amount of values, either synchronously or asynchronously"
+</p>
+</body>
+</html>
