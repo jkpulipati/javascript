@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>closures</title>
+</head>
+<body>
+
+<div>
+    A closure is an inner function that has access to the outer (enclosing) function’s
+    variables—scope chain. The closure has three scope chains:
+
+        it has access to its own scope (variables defined between its curly brackets),
+        it has access to the outer function’s variables,
+        and it has access to the global variables.
+
+</div>
+<p>
+    <b>Closures have access to the outer function’s variable even after the outer function returns:</b>
+
+    <b>Closures store references to the outer function’s variables;</b>
+
+    they do not store the actual value.
+    Closures get more interesting when the value of the outer function’s variable
+    changes before the closure is called. And this powerful feature can be harnessed
+    in creative ways, such as this private variables example first demonstrated by
+    Douglas Crockford: 
+
+
+</p>
+</body>
+</html>
