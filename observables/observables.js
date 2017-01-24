@@ -1,3 +1,9 @@
+/**
+ *
+ * @returns {number}
+ * https://github.com/ReactiveX/rxjs/blob/master/doc/observable.md
+ */
+
 function foo() {
     console.log('Hello');
     return 42;
